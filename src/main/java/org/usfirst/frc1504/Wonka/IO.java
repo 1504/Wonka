@@ -34,19 +34,20 @@ public class IO
 	{
 		return Utils.deadzone(_secondary.getRawAxis(Map.INTAKE_POWER_AXIS));
 	}
-	public static boolean get_crash_detection()
+	
+
+	
+
+	public static boolean get_enabler()
 	{
-		return _secondary.getRawButton(Map.CRASH_DETECTION);
+		return _secondary.getRawButton(Map.ENABLER);
 	}
 
-	public static boolean get_grabber()
-	{
-		return _secondary.getRawButton(Map.GRABBER);
-	}
+	
 
 	public static double get_intake_speed()
 	{
-		return _secondary.getRawAxis(Map.FORWARD_ROTORS) - _secondary.getRawAxis(Map.REVERSE_ROTORS);
+		return _secondary.getRawAxis(Map.TO_THE_GOOD_OLD_DAYS);
 	}
 	/** Hid Stuff
 	 * 

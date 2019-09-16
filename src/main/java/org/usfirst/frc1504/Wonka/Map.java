@@ -15,28 +15,12 @@ public class Map {
 
 	public static final int OVERRIDE_BUTTON = 5;
 
-	//10
-	//11
+	public static final int ENABLER = 3;
 
-	// Joystick inputs
-	// public static final int SPIN_ROTORS_IN = 1; //left joystick axis
-	public static final int GRABBER = 6; // RB (used to be 2 = B)
-	public static final int CRASH_DETECTION = 7; // left joystick button
 
-	//9 ?
-	//5 LB
+	public static final int TO_THE_GOOD_OLD_DAYS = 2;
 
-	//3
-	public static final int TOGGLE_MODE = 4; //Y
-
-	//1
-	public static final int AUTO_GRABBER_SWITCH = 7;
-	//0
-
-	//Axes
-	public static final int REVERSE_ROTORS = 3;
-	public static final int FORWARD_ROTORS = 2;
-	
+	public static final double ROLLER_SPEED_MULTIPLIER = 0.75;
 
 	//1 : A  - Auto_alignment_button
 	//2 : B  - Grabber
@@ -67,12 +51,11 @@ public class Map {
 /**
  * Pickup stuff
  */
-		public static final double ROLLER_SPEED_MULTIPLIER = 0.75;
 		
 		public static final int INTAKE_POWER_AXIS = 1;
 		
-		public static final int ROLLER_TALON_PORT_LEFT = 20;
-		public static final int ROLLER_TALON_PORT_RIGHT = 21;
+		public static final int WHEEL_TALON_PORT_LEFT = 20;
+		public static final int WHEEL_TALON_PORT_RIGHT = 21;
 		
 		public static final double PICKUP_GAIN = 0.03;
 		public static final double ROTATION_SPEED = 1;
