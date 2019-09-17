@@ -107,7 +107,7 @@ public class Digit_Board
 		}*/
 		//_last_pot = _current_pot;
 
-		_board.writeDigits(Double.toString(Wheels.speedo).substring(0, 4) + "%");
+		_board.writeDigits(Double.toString(Wheels.put_on_speedo()).substring(0, 4) + "%");
 	}
 	
 	//The loop for the separate thread, where all functions are called.

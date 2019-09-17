@@ -11,7 +11,7 @@ public class Wheels implements Updatable
 
     private WPI_TalonSRX _left_spew;
 	private WPI_TalonSRX _right_spew;
-    public static double speedo = 0;
+    private static double speedo = 0;
 
     public static Wheels getInstance() // sets instance
 	{
@@ -21,6 +21,11 @@ public class Wheels implements Updatable
     public static void initialize() // initialize
     {
         getInstance();
+    }
+
+    public static double put_on_speedo()
+    {
+        return speedo;
     }
 
     private Wheels()
