@@ -62,6 +62,9 @@ public class Wheels implements Updatable
         {
             _left_spew.set(-speedo);
             _right_spew.set(speedo);
+        } else {
+            _left_spew.set(0);
+            _right_spew.set(0);
         }
     }
 

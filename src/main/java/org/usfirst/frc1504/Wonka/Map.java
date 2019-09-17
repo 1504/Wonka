@@ -38,6 +38,8 @@ public class Map {
 	//4 : X axis-right joystick
 	//5 : Y axis-right joystick
 
+	//D-PAD controls are hid() in IO
+
 	public static final double POTENTIOMETER_LIMIT = 5;
 	// Joystick-rotation buttons
 
