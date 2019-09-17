@@ -15,8 +15,20 @@ public class Map {
 
 	public static final int OVERRIDE_BUTTON = 5;
 
+<<<<<<< Updated upstream
 	//10
 	//11
+=======
+	public static final int ENABLER = 5;
+
+	public static final int LAHIGH = 4;
+
+	public static final int LALOW = 1;
+
+	public static final int SSHIGH = 2;
+
+	public static final int SSLOW = 3;
+>>>>>>> Stashed changes
 
 	// Joystick inputs
 	// public static final int SPIN_ROTORS_IN = 1; //left joystick axis
@@ -38,19 +50,19 @@ public class Map {
 	public static final int FORWARD_ROTORS = 2;
 	
 
-	//1 : A  - Auto_alignment_button
-	//2 : B  - Grabber
-	//3 : X  - Auto_placement_button
-	//4 : Y  - extend/retract arms
-	//5 : LB - Endgame Lift Front
-	//6 : RB - Endgame Lift Back
+	//1 : A  - Preset 2 for Linear Actuator (half)
+	//2 : B  - Preset 1 for spew speed (70%)
+	//3 : X  - Preset 2 for spew speed (30%)
+	//4 : Y  - Preset 1 for Linear Actuator (full)
+	//5 : LB - Enabler
+	//6 : RB - 
 	//7 : Back 
 	//8 : Start
 	//9 : Press left joystick
 	//10 : Press right joystick
 	
 	//0 : X axis-left joystick
-	//1 : Y axis-left joystick - spinning rotors
+	//1 : Y axis-left joystick
 	//2 : LT
 	//3 : RT
 	//4 : X axis-right joystick

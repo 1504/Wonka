@@ -44,10 +44,33 @@ public class IO
 		return _secondary.getRawButton(Map.GRABBER);
 	}
 
+<<<<<<< Updated upstream
 	public static double get_intake_speed()
 	{
 		return _secondary.getRawAxis(Map.FORWARD_ROTORS) - _secondary.getRawAxis(Map.REVERSE_ROTORS);
 	}
+=======
+	public static boolean get_la_high()
+	{
+		return _secondary.getRawButton(Map.LAHIGH);
+	}
+
+	public static boolean get_la_low()
+	{
+		return _secondary.getRawButton(Map.LALOW);
+	}
+
+	public static boolean get_ss_high()
+	{
+		return _secondary.getRawButton(Map.SSHIGH);
+	}
+
+	public static boolean get_ss_low()
+	{
+		return _secondary.getRawButton(Map.SSLOW);
+	}
+	
+>>>>>>> Stashed changes
 	/** Hid Stuff
 	 * 
 	 */
