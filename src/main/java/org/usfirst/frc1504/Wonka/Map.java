@@ -15,10 +15,8 @@ public class Map {
 
 	public static final int OVERRIDE_BUTTON = 5;
 
-<<<<<<< Updated upstream
 	//10
 	//11
-=======
 	public static final int ENABLER = 5;
 
 	public static final int LAHIGH = 4;
@@ -28,7 +26,6 @@ public class Map {
 	public static final int SSHIGH = 2;
 
 	public static final int SSLOW = 3;
->>>>>>> Stashed changes
 
 	// Joystick inputs
 	// public static final int SPIN_ROTORS_IN = 1; //left joystick axis
@@ -120,6 +117,8 @@ public class Map {
 	public static final int BACK_LEFT_TALON_PORT = 12;
 	public static final int BACK_RIGHT_TALON_PORT = 13;
 	public static final int FRONT_RIGHT_TALON_PORT = 10;
+	public static final int WHEEL_TALON_PORT_LEFT = 20;
+	public static final int WHEEL_TALON_PORT_RIGHT = 21;
 	//public static final int[] DRIVE_MOTOR_PORTS = { FRONT_LEFT_TALON_PORT, BACK_LEFT_TALON_PORT, BACK_RIGHT_TALON_PORT, FRONT_RIGHT_TALON_PORT };
 	public static final int[] DRIVE_MOTOR_PORTS = { 11, 12, 13, 10 };
 

@@ -35,10 +35,10 @@ public class Wheels implements Updatable
 
     private void update()
     {
-        if(IO.hid_up())
+        if(IO.hid_right())
         {
             speedo = speedo + 0.01;
-        } else if(IO.hid_down())
+        } else if(IO.hid_left())
         {
             speedo = speedo - 0.01;
         }

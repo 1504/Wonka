@@ -44,12 +44,10 @@ public class IO
 		return _secondary.getRawButton(Map.GRABBER);
 	}
 
-<<<<<<< Updated upstream
 	public static double get_intake_speed()
 	{
 		return _secondary.getRawAxis(Map.FORWARD_ROTORS) - _secondary.getRawAxis(Map.REVERSE_ROTORS);
 	}
-=======
 	public static boolean get_la_high()
 	{
 		return _secondary.getRawButton(Map.LAHIGH);
@@ -69,8 +67,12 @@ public class IO
 	{
 		return _secondary.getRawButton(Map.SSLOW);
 	}
+
+	public static boolean get_enabler()
+	{
+		return _secondary.getRawButton(Map.ENABLER);
+	}
 	
->>>>>>> Stashed changes
 	/** Hid Stuff
 	 * 
 	 */
@@ -81,6 +83,24 @@ public class IO
 	public static boolean hid_up()
 	{
 		if(hid() == 0)
+		{
+			return true;
+		}
+		else 
+			return false;
+	}
+	public static boolean hid_right()
+	{
+		if(hid() == 90)
+		{
+			return true;
+		}
+		else 
+			return false;
+	}
+	public static boolean hid_left()
+	{
+		if(hid() == 270)
 		{
 			return true;
 		}
