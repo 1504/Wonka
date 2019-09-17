@@ -94,6 +94,7 @@ public class Digit_Board
 	//Writes the values to the digit board.
 	public void write()
 	{
+		/*
 		if(_current_pot < 0.5)
 		{
 			_board.writeDigits(Double.toString(_voltage).substring(0, 4) + "V");
@@ -103,8 +104,10 @@ public class Digit_Board
 			byte[][] buffer = {{0,0},{0,0},{0,0},{(byte)0b00111111, (byte)0b00100100}};
 
 			_board.writeRaw(buffer);
-		}
+		}*/
 		//_last_pot = _current_pot;
+
+		_board.writeDigits(Double.toString(Wheels.speedo).substring(0, 4) + "%");
 	}
 	
 	//The loop for the separate thread, where all functions are called.

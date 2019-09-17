@@ -1,7 +1,6 @@
 package org.usfirst.frc1504.Wonka;
 import org.usfirst.frc1504.Wonka.Update_Semaphore.Updatable;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
