@@ -18,7 +18,13 @@ public class Map {
 	public static final int ENABLER = 3;
 
 
-	public static final int TO_THE_GOOD_OLD_DAYS = 2;
+	public static final int TO_THE_GOOD_OLD_DAYS = 5;
+	
+	public static final int RPRESET = 4;
+	
+	public static final int LPRESET = 0;
+	
+	public static final int IF_WE_COULD_TURN_BACK_TIME = 1;
 
 	public static final double ROLLER_SPEED_MULTIPLIER = 0.75;
 

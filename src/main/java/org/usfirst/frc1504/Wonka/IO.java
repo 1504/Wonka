@@ -5,6 +5,7 @@ public class IO
 	private static Latch_Joystick _drive_forward = new Latch_Joystick(Map.DRIVE_CARTESIAN_JOYSTICK);
 	private static Latch_Joystick _drive_rotation = new Latch_Joystick(Map.DRIVE_POLAR_JOYSTICK);
 	private static Latch_Joystick _secondary = new Latch_Joystick(Map.DRIVE_SECONDARY_JOYSTICK);
+	public static double speedo = 0;
 
 	public static final long ROBOT_START_TIME = System.currentTimeMillis();
 	
@@ -47,7 +48,28 @@ public class IO
 
 	public static double get_intake_speed()
 	{
-		return _secondary.getRawAxis(Map.TO_THE_GOOD_OLD_DAYS);
+		if(get_enabler())
+		{
+			double temporary_double = _secondary.getRawButton(Map.IF_WE_COULD_TURN_BACK_TIME) ? 1 : 0;
+			speedo = temporary_double * 0.1 + speedo;
+			temporary_double = _secondary.getRawButton(Map.TO_THE_GOOD_OLD_DAYS) ? 1 : 0;
+			speedo = speedo - temporary_double * 0.1;
+			if(speedo > 1)
+			{
+				speedo = 1;
+			} else if(speedo < 0)
+			{
+				speedo = 0;
+			} else if( _secondary.getRawButton(Map.RPRESET))
+			{
+				speedo = 0.5;
+			} else if( _secondary.getRawButton(Map.LPRESET))
+			{
+				speedo = 0.7;
+			}
+			return speedo;
+		}
+		return 0;
 	}
 	/** Hid Stuff
 	 * 

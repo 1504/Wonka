@@ -36,8 +36,8 @@ public class Wheels implements Updatable
     {
         if(IO.get_enabler())
         {
-            _left_spew.set(IO.get_intake_speed());
-            _right_spew.set(-IO.get_intake_speed());
+            _left_spew.set(-IO.get_intake_speed());
+            _right_spew.set(IO.get_intake_speed());
         }
     }
 
