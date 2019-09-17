@@ -40,9 +40,9 @@ public class Wheels implements Updatable
             speedo = speedo + 0.01;
         } else if(IO.hid_down())
         {
-            speedo = speedo + 0.01;
+            speedo = speedo - 0.01;
         }
-        
+
 		if(speedo > 1)
 		{
 			speedo = 1;
