@@ -131,7 +131,7 @@ public class Robot extends RobotBase {
 					//SmartDashboard.putNumber("Arm Power", _pickup.getPower());
 					SmartDashboard.putNumber("Pressure High", pressure_1.getAverageVoltage()*50 - 25);
 					SmartDashboard.putNumber("Pressure Low", pressure_2.getAverageVoltage()*50 - 25);
-					SmartDashboard.putString("Spew Speed", (IO.speedo*100) + "%");
+					SmartDashboard.putString("Spew Speed", (Wheels.speedo*100) + "%");
 					
 					/*SmartDashboard.putBoolean("Alignment Good Configuration", Auto_Alignment.check_sensors());
 					SmartDashboard.putBoolean("Alignment Sensor 1", !Auto_Alignment.sensor1.get());

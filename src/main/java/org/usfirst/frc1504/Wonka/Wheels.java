@@ -12,6 +12,7 @@ public class Wheels implements Updatable
 
     private WPI_TalonSRX _left_spew;
 	private WPI_TalonSRX _right_spew;
+    public static double speedo = 0;
 
     public static Wheels getInstance() // sets instance
 	{
@@ -34,10 +35,33 @@ public class Wheels implements Updatable
 
     private void update()
     {
+        if(IO.hid_up())
+        {
+            speedo = speedo + 0.01;
+        } else if(IO.hid_down())
+        {
+            speedo = speedo + 0.01;
+        }
+        
+		if(speedo > 1)
+		{
+			speedo = 1;
+		} else if(speedo < 0)
+		{
+			speedo = 0;
+		}
+        
+        if(IO.hid() == 270)
+		{
+			speedo = 0.5;
+		} else if(IO.hid() == 90)
+		{
+			speedo = 0.7;
+		}
         if(IO.get_enabler())
         {
-            _left_spew.set(-IO.get_intake_speed());
-            _right_spew.set(IO.get_intake_speed());
+            _left_spew.set(-speedo);
+            _right_spew.set(speedo);
         }
     }
 
