@@ -16,35 +16,21 @@ import edu.wpi.first.wpilibj.Preferences;
 
 public class Elevator implements Updatable {
 	// Elevator
-	public enum ELEVATOR_MODE {HATCH, CARGO, INIT};
-	private ELEVATOR_MODE _mode = ELEVATOR_MODE.INIT;
 	private static double speedo = 0;
 
-	private String[] _setpoint_names = {"Home 1", "Home 2", "Low", "Mid", "High"};
-	//private double[][] _bottom_setpoints = {{18.4, 10.4}, {18.4, 16.1}, {10.6, 12.5}, {10.6, 30.9}, {80.0, 74.3}};
-	//private double[][] _top_setpoints = {{12.0, 13.8}, {12.0, 58.8}, {24.5, 40.3}, {72.4, 63.9}, {71.0, 72.5}};
-	private double[][] _bottom_setpoints = {{18.4, 10.4}, {18.4, 16.1}, {10.6, 12.5}, {10.6, 30.9}, {80.0, 74.3}};
-	private double[][] _top_setpoints = {{13.0, 13.8}, {13.0, 58.8}, {23.8, 41.3}, {72.4, 64.9}, {71.0, 73.5}};
 	private boolean _elevator_enable = false;
-	private int _setpoint = 0;
-
-	private int _last_input = -1;
-	//private boolean _last_mode_input = false;
-	private int _override_setpoint_count = 0;
+	
 
 	private WPI_TalonSRX _top_actuator;
 	//private WPI_TalonSRX _bottom_actuator;
 	//private CANSparkMax _top_actuator;
-	private CANSparkMax _bottom_actuator;
-
-	public boolean lastElevatorButtonState = false;
+	
 
 	private static final Elevator instance = new Elevator();
 	private DriverStation _ds = DriverStation.getInstance();
 
-	private Potentiometer _bottom_potentiometer;
+	
 	private Potentiometer _top_potentiometer;
-	private CANEncoder _bottom_encoder;
 	//private CANEncoder _top_encoder;
 	//private Glide _bottom_glide;
 	//private Glide _top_glide;
@@ -66,23 +52,6 @@ public class Elevator implements Updatable {
 
 		//_top_glide = new Glide(.007, .025);
 		//_bottom_glide = new Glide(.007, .025);
-
-		Preferences p = Preferences.getInstance();
-		int i, j;
-		for(i = 0; i < _top_setpoints.length; i++)
-		{
-			for(j = 0; j < _top_setpoints[i].length; j++)
-			{
-				if(!p.containsKey("Elevator_top_" + i + "_" + j))
-					p.putDouble("Elevator_top_" + i + "_" + j, _top_setpoints[i][j]);
-				if(!p.containsKey("Elevator_bottom_" + i + "_" + j))
-					p.putDouble("Elevator_bottom_" + i + "_" + j, _bottom_setpoints[i][j]);
-				
-				_top_setpoints[i][j] = p.getDouble("Elevator_top_" + i + "_" + j, _top_setpoints[i][j]);
-				_bottom_setpoints[i][j] = p.getDouble("Elevator_bottom_" + i + "_" + j, _bottom_setpoints[i][j]);
-			}
-		}
-
 		Update_Semaphore.getInstance().register(this);
 		System.out.println("Elevator initialized");
 	}
@@ -92,43 +61,10 @@ public class Elevator implements Updatable {
 		getInstance();
 	}
 
-	public ELEVATOR_MODE getMode()
-	{
-		return _mode;
-	}
-
-	public boolean getMoving()
-	{
-		return !(Math.abs(_top_actuator.get()) < 0.4 && Math.abs(_bottom_actuator.get()) < 0.4);
-	}
-
-	public int getSetpoint()
-	{
-		return _setpoint;
-	}
-
 	public boolean getEnabled()
 	{
 		return _elevator_enable;
 	}
-
-	private void compute_nearest_setpoint()
-	{
-		int i;
-		for(i = 0; i < _top_setpoints.length; i++)
-		{
-			if(Math.abs(_top_setpoints[i][_mode.ordinal()] - _top_potentiometer.get()) < 3.0 &&
-				Math.abs(_bottom_setpoints[i][_mode.ordinal()] - _bottom_potentiometer.get()) < 3.0)
-			{
-				_setpoint = i;
-				_elevator_enable = true;
-				return;
-			}
-		}
-		_setpoint = 0;
-		_elevator_enable = false;
-	}
-
 	
 	
 	private void update()
@@ -138,77 +74,26 @@ public class Elevator implements Updatable {
 			Math.abs(_bottom_encoder.getPosition() - _bottom_potentiometer.get()) > 3.7)
 			_elevator_enable = false;*/
 		
-		if(!_elevator_enable || _mode == ELEVATOR_MODE.INIT)
+		if(!_elevator_enable)
 		{
 			if(!IO.override())
 			{
 				_top_actuator.set(0.0);
-				_bottom_actuator.set(0.0);
 			}
 			//_moving = false;
 			return;
 		}
-		
-		double top_error = (_top_setpoints[_setpoint][_mode.ordinal()] - _top_potentiometer.get());
-		double bottom_error = (_bottom_setpoints[_setpoint][_mode.ordinal()] - _bottom_potentiometer.get());
 		//double top_error = (_top_setpoints[_setpoint][_mode.ordinal()] - _top_encoder.getPosition());
 		//double bottom_error = (_bottom_setpoints[_setpoint][_mode.ordinal()] - _bottom_encoder.getPosition());
 		
 		//top_error = Math.pow(top_error / 1.4, 2.0) * Math.signum(top_error);
-		bottom_error = Math.pow(bottom_error  / 1.4, 2.0) * Math.signum(bottom_error);
-
-		if(_mode == ELEVATOR_MODE.HATCH)
-			top_error += Wheels.put_on_speedo() * 2.5;
-		
-		//if(Math.abs(top_error) < 1.0)
-		//	top_error = 0.0;
-		if(Math.abs(bottom_error) < 1.0)
-			bottom_error = 0.0;
-
-		_top_actuator.set(top_error * 0.35* (Math.signum(top_error) < 0.0 ? 0.3 : 0.8));
-		_bottom_actuator.set(bottom_error * 0.2 * (Math.signum(bottom_error) < 0.0 ? 0.3 : 0.8));
 	}
 
-	private void update_dashboard()
-	{
-		//uddb
-		SmartDashboard.putString("Elevator Mode", _mode.toString());
-		SmartDashboard.putBoolean("Elevator Enabled", _elevator_enable);
-		SmartDashboard.putNumber("Elevator Setpoint", _setpoint);
-		SmartDashboard.putString("Elevator Setpoint Name", _setpoint_names[_setpoint]);
-		SmartDashboard.putNumber("Elevator Top Actuator Position", _top_potentiometer.get());
-		SmartDashboard.putNumber("Elevator Bottom Actuator Position", _bottom_potentiometer.get());
-		SmartDashboard.putNumber("Elevator Top Actuator Current", _top_actuator.getOutputCurrent());
-		SmartDashboard.putNumber("Elevator Bottom Actuator Current", _bottom_actuator.getOutputCurrent());
-		//SmartDashboard.putNumber("Elevator Top Encoder Position", _top_encoder.getPosition());
-		//SmartDashboard.putNumber("Elevator Bottom Encoder Position", _bottom_encoder.getPosition());
-		//SmartDashboard.putNumber("Elevator Top Actuator Speed", _top_actuator.getEncoder().getVelocity());
-		//SmartDashboard.putNumber("Elevator Bottom Actuator Speed", _bottom_actuator.getEncoder().getVelocity());
-		
-		int mode = (_mode.ordinal() < _top_setpoints[0].length) ? _mode.ordinal() : 0;
-
-		SmartDashboard.putNumber("Elevator Top Actuator Commanded Position", _top_setpoints[_setpoint][mode]);
-		SmartDashboard.putNumber("Elevator Bottom Actuator Commanded Position", _bottom_setpoints[_setpoint][mode]);
-		SmartDashboard.putNumber("Elevator Top Actuator Position Error", (_top_setpoints[_setpoint][mode] - _top_potentiometer.get()));
-		SmartDashboard.putNumber("Elevator Bottom Actuator Position Error", (_bottom_setpoints[_setpoint][mode] - _bottom_potentiometer.get()));
-	}
-
-	public void set(ELEVATOR_MODE mode, int position, boolean enable_override)
-	{
-		_mode = mode;
-		_setpoint = position;
-
-		if(!_elevator_enable && enable_override)
-			_elevator_enable = true;
-	}
 
 	public void semaphore_update() // updates robot information
 	{
-		update_dashboard();  
-
 		if (_ds.isDisabled()) // only runs in teleop
 		{
-			_mode = ELEVATOR_MODE.INIT;
 			_elevator_enable = false;
 			return;
 		}
@@ -217,7 +102,7 @@ public class Elevator implements Updatable {
 		if(IO.override())
 		{
 			_elevator_enable = false;
-			
+		}
 		if(IO.hid_N())
         {
             speedo = speedo + 0.01;
@@ -243,29 +128,9 @@ public class Elevator implements Updatable {
         }
 			_top_actuator.set(speedo * .7);
 
-			//_top_encoder.setPosition(_top_potentiometer.get());
-			//_bottom_encoder.setPosition(_bottom_potentiometer.get());
-
-			if(_mode != ELEVATOR_MODE.INIT)
-			{
-				if(IO.hid() != -1)
-					_override_setpoint_count++;
-				else
-					_override_setpoint_count = 0;
-				
-				if(_override_setpoint_count == 40) // > 800 milliseconds
-				{
-					_top_setpoints[_setpoint][_mode.ordinal()] = _top_potentiometer.get();
-					_bottom_setpoints[_setpoint][_mode.ordinal()] = _bottom_potentiometer.get();
-					Preferences.getInstance().putDouble("Elevator_top_" + _setpoint + "_" + _mode.ordinal(), _top_setpoints[_setpoint][_mode.ordinal()]);
-					Preferences.getInstance().putDouble("Elevator_bottom_" + _setpoint + "_" + _mode.ordinal(), _bottom_setpoints[_setpoint][_mode.ordinal()]);
-					
-					System.out.println("Elevator setpoint for " + _mode.toString() + " - " + _setpoint_names[_setpoint] + " (" + _setpoint + ") updated to (" + _top_setpoints[_setpoint][_mode.ordinal()] + ", " + _bottom_setpoints[_setpoint][_mode.ordinal()] + ")");
-				}
-			}
+			update();
 		}
 
 		
-		update();
+		
 	}
-}
