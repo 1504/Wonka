@@ -15,8 +15,19 @@ public class Map {
 
 	public static final int OVERRIDE_BUTTON = 5;
 
-	public static final int ENABLER = 3;
+	public static final int ENABLER = 5;
 
+	public static final int LAHIGH = 4;
+
+	public static final int LALOW = 1;
+
+	public static final int SSHIGH = 2;
+
+	public static final int SSLOW = 3;
+
+	public static final int TOP_POTENTIOMETER_PORT = 1;
+
+	public static final int TOP_ACTUATOR_PORT = 31; 
 
 	public static final double ROLLER_SPEED_MULTIPLIER = 0.75;
 

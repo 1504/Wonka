@@ -36,7 +36,25 @@ public class IO
 	}
 	
 
-	
+	public static boolean get_la_high()
+	{
+		return _secondary.getRawButton(Map.LAHIGH);
+	}
+
+	public static boolean get_la_low()
+	{
+		return _secondary.getRawButton(Map.LALOW);
+	}
+
+	public static boolean get_ss_high()
+	{
+		return _secondary.getRawButton(Map.SSHIGH);
+	}
+
+	public static boolean get_ss_low()
+	{
+		return _secondary.getRawButton(Map.SSLOW);
+	}
 
 	public static boolean get_enabler()
 	{
