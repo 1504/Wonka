@@ -8,7 +8,7 @@
       "type": "java",
       "name": "CodeLens (Launch) - Main",
       "request": "launch",
-      "mainClass": "org.usfirst.frc1504.Robot2019.Main",
+      "mainClass": "org.usfirst.frc1504.Wonka.Main",
       "projectName": "Robot2019"
     },
     {

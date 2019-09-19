@@ -27,7 +27,7 @@ public class Map {
 
 	public static final int TOP_POTENTIOMETER_PORT = 1;
 
-	public static final int TOP_ACTUATOR_PORT = 31; 
+	public static final int TOP_ACTUATOR_PORT = 30; 
 
 	public static final double ROLLER_SPEED_MULTIPLIER = 0.75;
 

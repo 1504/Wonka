@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 //import com.ctre.phoenix.motorcontrol.NeutralMode;
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.CANSparkMax;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 //import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -127,7 +129,7 @@ public class Drive implements Updatable
 	private volatile double[] _orbit_point = {0.0, 1.0}; //-1.15}; //{0.0, 1.15};
 
 	//private WPI_TalonSRX[] _motors = new WPI_TalonSRX[Map.DRIVE_MOTOR_PORTS.length];
-	private CANSparkMax[] _motors = new CANSparkMax[Map.DRIVE_MOTOR_PORTS.length];
+	private WPI_TalonSRX[] _motors = new WPI_TalonSRX[Map.DRIVE_MOTOR_PORTS.length];
 	//public static AnalogInput sanic = new AnalogInput(3);
 
 	/**
@@ -140,8 +142,7 @@ public class Drive implements Updatable
 			//_motors[i] = new WPI_TalonSRX(Map.DRIVE_MOTOR_PORTS[i]);
 			//_motors[i].setNeutralMode(NeutralMode.Brake);
 
-			_motors[i] = new CANSparkMax(Map.DRIVE_MOTOR_PORTS[i], com.revrobotics.CANSparkMaxLowLevel.MotorType.kBrushless);
-			_motors[i].setIdleMode(CANSparkMax.IdleMode.kBrake);
+			_motors[i] = new WPI_TalonSRX(Map.DRIVE_MOTOR_PORTS[i]);
 		}
 
 		set_orbit_point(_orbit_point);
@@ -584,7 +585,6 @@ public class Drive implements Updatable
 		for(int i = 0; i < _motors.length; i++)
 		{
 			_motors[i].set(values[i] * Map.DRIVE_OUTPUT_MAGIC_NUMBERS[i]);
-			SmartDashboard.putNumber("Drive Motor " + i, _motors[i].getEncoder().getVelocity());
 		}
 	}
 	
@@ -621,18 +621,6 @@ public class Drive implements Updatable
 		SmartDashboard.putNumber("Distance (ft)", sanic_value());
 	}
 
-	public double[] computed_inputs()
-	{
-		double a = _motors[0].getEncoder().getVelocity() * Map.DRIVE_OUTPUT_MAGIC_NUMBERS[0];
-		double b = _motors[1].getEncoder().getVelocity() * Map.DRIVE_OUTPUT_MAGIC_NUMBERS[0];
-		double c = _motors[2].getEncoder().getVelocity() * Map.DRIVE_OUTPUT_MAGIC_NUMBERS[0];
-		double d = _motors[3].getEncoder().getVelocity() * Map.DRIVE_OUTPUT_MAGIC_NUMBERS[0];
-		double[] computed = {((c+b)/2.0 + (d+a)/2.0)/2.0, ((b-a)/-2.0 + (d-c)/-2.0)/2.0, ((c-a)/2.0 + (d-b)/2.0)/2.0};
-		
-		for(double item : computed)
-				item /= 6000.0;
 	
-		return computed;
-	}
 	
 }
