@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.Preferences;
 
 public class Elevator implements Updatable {
 	// Elevator
-	private static double speedo = 0;
+	private static double rotato = 0;
 
 	private boolean _elevator_enable = false;
 	
@@ -105,32 +105,29 @@ public class Elevator implements Updatable {
 		}
 		if(IO.hid_N())
         {
-            speedo = speedo + 0.01;
+            rotato = rotato + 0.01;
         } else if(IO.hid_S())
         {
-            speedo = speedo - 0.01;
+            rotato = rotato - 0.01;
         }
 
-		if(speedo > 1)
+		if(rotato > 1)
 		{
-			speedo = 1;
-		} else if(speedo < 0)
+			rotato = 1;
+		} else if(rotato < 0)
 		{
-			speedo = 0;
+			rotato = 0;
 		}
-        
-        if(IO.get_la_low())
+		if(IO.hid_N() || IO.hid_S())
 		{
-			speedo = 0.5;
-		} else if(IO.get_la_high())
-		{
-			speedo = 0.7;
-        }
-			_top_actuator.set(speedo * .7);
-
-			update();
+			_top_actuator.set(rotato * .7);
+		} else {
+			rotato = 0;
 		}
-
 		
-		
+		update();
 	}
+
+		
+		
+}
