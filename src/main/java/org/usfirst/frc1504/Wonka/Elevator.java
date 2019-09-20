@@ -61,71 +61,27 @@ public class Elevator implements Updatable {
 		getInstance();
 	}
 
-	public boolean getEnabled()
-	{
-		return _elevator_enable;
-	}
-	
-	
-	private void update()
-	{
-		// Disable elevator if encoder and potentiometer drift too far apart
-		/*if(	Math.abs(_top_encoder.getPosition() - _top_potentiometer.get()) > 3.7 ||
-			Math.abs(_bottom_encoder.getPosition() - _bottom_potentiometer.get()) > 3.7)
-			_elevator_enable = false;*/
-		
-		if(!_elevator_enable)
-		{
-			if(!IO.override())
-			{
-				_top_actuator.set(0.0);
-			}
-			//_moving = false;
-			return;
-		}
-		//double top_error = (_top_setpoints[_setpoint][_mode.ordinal()] - _top_encoder.getPosition());
-		//double bottom_error = (_bottom_setpoints[_setpoint][_mode.ordinal()] - _bottom_encoder.getPosition());
-		
-		//top_error = Math.pow(top_error / 1.4, 2.0) * Math.signum(top_error);
-	}
 
 
 	public void semaphore_update() // updates robot information
 	{
 		if (_ds.isDisabled()) // only runs in teleop
 		{
-			_elevator_enable = false;
 			return;
 		}
 
-		
-		if(IO.override())
-		{
-			_elevator_enable = false;
-		}
 		if(IO.hid_N())
         {
-            rotato = rotato + 0.01;
+            _top_actuator.set(1.0);
         } else if(IO.hid_S())
         {
-            rotato = rotato - 0.01;
-        }
-
-		if(rotato > 1)
-		{
-			rotato = 1;
-		} else if(rotato < 0)
-		{
-			rotato = 0;
+            _top_actuator.set(-1.0);
 		}
-		if(IO.hid_N() || IO.hid_S())
+		else
 		{
-			_top_actuator.set(rotato * .7);
-		} else {
-			rotato = 0;
+			_top_actuator.set(0.0);
 		}
 		
-		update();
 	}
 
 		

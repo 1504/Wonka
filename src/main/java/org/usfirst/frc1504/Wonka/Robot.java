@@ -73,6 +73,7 @@ public class Robot extends RobotBase {
     	DigitBoard.initialize();
     	Digit_Board.initialize();
 		Arduino.initialize();
+		Elevator.initialize();
 		 //   	//CameraServer.getInstance().startAutomaticCapture();
     	//System.out.println("Game specific message: "+_ds.getGameSpecificMessage()); 
     	//RRL - Right side switch (closer), Right side scale, Left side switch (farther)

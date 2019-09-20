@@ -3,6 +3,8 @@ import org.usfirst.frc1504.Wonka.Update_Semaphore.Updatable;
 import edu.wpi.first.wpilibj.DriverStation;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 
 public class Wheels implements Updatable
 {
@@ -11,7 +13,8 @@ public class Wheels implements Updatable
 
     private WPI_TalonSRX _left_spew;
 	private WPI_TalonSRX _right_spew;
-    private static double speedo = 0;
+    private static double speedo = 0.32;
+    private static final double max_speed = 0.55;
 
     public static Wheels getInstance() // sets instance
 	{
@@ -32,6 +35,9 @@ public class Wheels implements Updatable
     {
 		_left_spew = new WPI_TalonSRX(Map.WHEEL_TALON_PORT_LEFT);
         _right_spew = new WPI_TalonSRX(Map.WHEEL_TALON_PORT_RIGHT);
+
+        _left_spew.setNeutralMode(NeutralMode.Brake);
+        _right_spew.setNeutralMode(NeutralMode.Brake);
         
         Update_Semaphore.getInstance().register(this);
         System.out.println("Wheels initialized");
@@ -41,15 +47,15 @@ public class Wheels implements Updatable
     {
         if(IO.hid_E())
         {
-            speedo = speedo + 0.01;
+            speedo = speedo + 0.005;
         } else if(IO.hid_W())
         {
-            speedo = speedo - 0.01;
+            speedo = speedo - 0.005;
         }
 
-		if(speedo > 1)
+		if(speedo > max_speed)
 		{
-			speedo = 1;
+			speedo = max_speed;
 		} else if(speedo < 0)
 		{
 			speedo = 0;
@@ -57,10 +63,10 @@ public class Wheels implements Updatable
         
         if(IO.get_ss_low())
 		{
-			speedo = 0.5;
+			speedo = 0.32;
 		} else if(IO.get_ss_high())
 		{
-			speedo = 0.7;
+			speedo = 0.4;
         }
         
         if(IO.get_enabler())
@@ -71,6 +77,7 @@ public class Wheels implements Updatable
             _left_spew.set(0);
             _right_spew.set(0);
         }
+        System.out.println(speedo);
     }
 
     public void semaphore_update() // updates robot information
