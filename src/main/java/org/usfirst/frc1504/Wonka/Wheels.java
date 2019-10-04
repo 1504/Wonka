@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import edu.wpi.first.wpilibj.Servo;
 
 
 public class Wheels implements Updatable
@@ -15,6 +16,7 @@ public class Wheels implements Updatable
 	private WPI_TalonSRX _right_spew;
     private static double speedo = 0.32;
     private static final double max_speed = 0.55;
+    private Servo card_rotator = new Servo(Map.CARD_SERVO);
 
     public static Wheels getInstance() // sets instance
 	{
@@ -77,7 +79,13 @@ public class Wheels implements Updatable
             _left_spew.set(0);
             _right_spew.set(0);
         }
+        card_rotator();
         System.out.println(speedo);
+    }
+
+    private void card_rotator() 
+    {
+        card_rotator.set((IO.card_servo_input()+1)/2);
     }
 
     public void semaphore_update() // updates robot information

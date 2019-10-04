@@ -199,7 +199,7 @@ public class Drive implements Updatable
 	private void mainTask()
 	{
 		double[] input = new double[4];
-		//double[] output = new double[4];
+		double[] output = new double[4];
 		while(_thread_alive)
 		{
 			input = _input;
@@ -252,6 +252,8 @@ public class Drive implements Updatable
 					}
 				// _dump = false;
 				}
+				output = outputCompute(input);
+				motorOutput(output);
 			}
 			else //when disabled:
 			{

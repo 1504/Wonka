@@ -13,6 +13,8 @@ public class Map {
 	public static final int DRIVE_POLAR_JOYSTICK = 1;
 	public static final int DRIVE_SECONDARY_JOYSTICK = 2;
 
+	public static final int CARD_SERVO = 0;
+
 	public static final int OVERRIDE_BUTTON = 5;
 
 	public static final int ENABLER = 5;
@@ -24,6 +26,8 @@ public class Map {
 	public static final int SSHIGH = 2;
 
 	public static final int SSLOW = 3;
+
+	public static final int CARD_SERVO_INPUT = 5;
 
 	public static final int TOP_POTENTIOMETER_PORT = 1;
 

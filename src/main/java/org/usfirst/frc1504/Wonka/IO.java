@@ -34,6 +34,11 @@ public class IO
 	{
 		return Utils.deadzone(_secondary.getRawAxis(Map.INTAKE_POWER_AXIS));
 	}
+
+	public static double card_servo_input()
+	{
+		return _secondary.getRawAxis(Map.CARD_SERVO_INPUT);
+	}
 	
 
 	public static boolean get_la_high()
