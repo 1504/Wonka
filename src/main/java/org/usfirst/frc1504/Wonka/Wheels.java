@@ -84,8 +84,8 @@ public class Wheels implements Updatable
     }
 
     private void card_rotator() 
-    {
-        card_rotator.set((IO.card_servo_input()+1)/2);
+    { 
+        card_rotator.set((IO.card_servo_input()+1)/2); //cleans input into 0 to 1
     }
 
     public void semaphore_update() // updates robot information
