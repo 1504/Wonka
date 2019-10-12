@@ -18,6 +18,8 @@ public class Map {
 	public static final int OVERRIDE_BUTTON = 5;
 
 	public static final int ENABLER = 5;
+	
+	public static final int AUGER_MOTOR = 5;
 
 	public static final int LAHIGH = 4;
 
@@ -27,12 +29,16 @@ public class Map {
 
 	public static final int SSLOW = 3;
 
+	public static final int FUNNEL_WHEEL = 6;
+
 	public static final int CARD_SERVO_INPUT = 5;
+	
 
 	public static final int TOP_POTENTIOMETER_PORT = 1;
 
 	public static final int TOP_ACTUATOR_PORT = 30; 
 
+	public static final int AUGER_PORT = 39;
 	public static final double ROLLER_SPEED_MULTIPLIER = 0.75;
 
 	//1 : A  - Auto_alignment_button
@@ -120,7 +126,7 @@ public class Map {
 			DRIVE_RIGHT_TOP };
 
 	// Drive Input magic numbers
-	public static final double[] DRIVE_INPUT_MAGIC_NUMBERS = { -1.0, 1.0, -0.6 };
+	public static final double[] DRIVE_INPUT_MAGIC_NUMBERS = { -1.0, -1.0, -0.6 };
 	public static final double DRIVE_INPUT_TURN_FACTOR = 0.2;
 
 	public static final double DRIVE_INPUT_VISION_SPEED = 0.75;
