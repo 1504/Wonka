@@ -13,8 +13,10 @@ public class Wheels implements Updatable
     private DriverStation _ds = DriverStation.getInstance();
 
     private WPI_TalonSRX _left_spew;
+    private WPI_TalonSRX _funnel_spew;
 	private WPI_TalonSRX _right_spew;
     private static double speedo = 0.32;
+    private static double funnel_wheel_speed = 0;
     private static final double max_speed = 0.55;
     private Servo card_rotator = new Servo(Map.CARD_SERVO);
 
@@ -37,9 +39,11 @@ public class Wheels implements Updatable
     {
 		_left_spew = new WPI_TalonSRX(Map.WHEEL_TALON_PORT_LEFT);
         _right_spew = new WPI_TalonSRX(Map.WHEEL_TALON_PORT_RIGHT);
+		_funnel_spew = new WPI_TalonSRX(Map.WHEEL_TALON_PORT_LEFT);
 
         _left_spew.setNeutralMode(NeutralMode.Brake);
         _right_spew.setNeutralMode(NeutralMode.Brake);
+        _funnel_spew.setNeutralMode(NeutralMode.Brake);
         
         Update_Semaphore.getInstance().register(this);
         System.out.println("Wheels initialized");
@@ -85,7 +89,18 @@ public class Wheels implements Updatable
 
     private void card_rotator() 
     {
-        card_rotator.set((IO.card_servo_input()+1)/2);
+        card_rotator.set(IO.card_servo_input());
+    }
+
+    private void funnel_wheel() 
+    {
+        if(IO.get_funnel())
+        {
+            funnel_wheel_speed = 1;
+        } else {
+            funnel_wheel_speed = 0;
+        }
+        _funnel_spew.set(funnel_wheel_speed);
     }
 
     public void semaphore_update() // updates robot information

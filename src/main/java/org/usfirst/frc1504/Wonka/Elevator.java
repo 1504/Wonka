@@ -17,11 +17,13 @@ import edu.wpi.first.wpilibj.Preferences;
 public class Elevator implements Updatable {
 	// Elevator
 	private static double rotato = 0;
+	private int reverse = 1;
 
 	private boolean _elevator_enable = false;
 	
 
 	private WPI_TalonSRX _top_actuator;
+	private WPI_TalonSRX _auger;
 	//private WPI_TalonSRX _bottom_actuator;
 	//private CANSparkMax _top_actuator;
 	
@@ -47,6 +49,8 @@ public class Elevator implements Updatable {
 		_top_potentiometer = new AnalogPotentiometer(b, 100, 0);
 
 		_top_actuator = new WPI_TalonSRX(Map.TOP_ACTUATOR_PORT);
+		
+		_auger = new WPI_TalonSRX(Map.AUGER_PORT);
 		//_bottom_actuator = new WPI_TalonSRX(Map.BOTTOM_ACTUATOR_PORT);
 		_top_actuator.setNeutralMode(NeutralMode.Brake);
 
@@ -61,10 +65,21 @@ public class Elevator implements Updatable {
 		getInstance();
 	}
 
+	private void ooger_speeds() 
+    {
+		if(IO.get_reverse())
+		{
+			reverse = -1;
+		} else {
+			reverse = 1;
+		}
+        _auger.set(reverse*IO.get_auger());
+    }
 
 
 	public void semaphore_update() // updates robot information
 	{
+		ooger_speeds();
 		if (_ds.isDisabled()) // only runs in teleop
 		{
 			return;

@@ -37,7 +37,7 @@ public class IO
 
 	public static double card_servo_input()
 	{
-		return _secondary.getRawAxis(Map.CARD_SERVO_INPUT);
+		return _secondary.getRawAxis(Map.CARD_SERVO_INPUT) * 0.115;
 	}
 	
 
@@ -66,7 +66,21 @@ public class IO
 		return _secondary.getRawButton(Map.ENABLER);
 	}
 
-	
+	public static boolean get_funnel()
+	{
+		return _secondary.getRawButton(Map.FUNNEL_WHEEL);
+	}
+
+	public static boolean get_reverse()
+	{
+		return _secondary.getRawButton(Map.REVERSE);
+	}
+
+	public static double get_auger()
+	{
+		return _secondary.getRawAxis(Map.AUGER_MOTOR);
+	}
+
 	/** Hid Stuff
 	 * 
 	 */
@@ -110,8 +124,8 @@ public class IO
 	public static double[] drive_input() {
 		double[] inputs = new double[3];
 
-		inputs[0] = Map.DRIVE_INPUT_MAGIC_NUMBERS[0] * Math.pow(Utils.deadzone(_drive_forward.getRawAxis(Map.JOYSTICK_Y_AXIS)), 2) * Math.signum(_drive_forward.getRawAxis(Map.JOYSTICK_Y_AXIS));// y
-		inputs[1] = Map.DRIVE_INPUT_MAGIC_NUMBERS[1] * Math.pow(Utils.deadzone(_drive_forward.getRawAxis(Map.JOYSTICK_X_AXIS)), 2) * Math.signum(_drive_forward.getRawAxis(Map.JOYSTICK_X_AXIS));//x
+		inputs[0] = Map.DRIVE_INPUT_MAGIC_NUMBERS[0] * Math.pow(Utils.deadzone(_drive_forward.getRawAxis(Map.JOYSTICK_X_AXIS)), 2) * Math.signum(_drive_forward.getRawAxis(Map.JOYSTICK_X_AXIS));// y
+		inputs[1] = Map.DRIVE_INPUT_MAGIC_NUMBERS[1] * Math.pow(Utils.deadzone(_drive_forward.getRawAxis(Map.JOYSTICK_Y_AXIS)), 2) * Math.signum(_drive_forward.getRawAxis(Map.JOYSTICK_Y_AXIS));//x
 		inputs[2] = Map.DRIVE_INPUT_MAGIC_NUMBERS[2] * Math.pow(Utils.deadzone(_drive_rotation.getRawAxis(Map.JOYSTICK_X_AXIS)), 2) * Math.signum(_drive_rotation.getRawAxis(Map.JOYSTICK_X_AXIS));//w
 		return inputs;
 	}
