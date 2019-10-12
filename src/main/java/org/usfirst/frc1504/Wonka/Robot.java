@@ -1,8 +1,5 @@
 package org.usfirst.frc1504.Wonka;
 
-import edu.wpi.first.networktables.*;
-import java.util.HashMap;
-import edu.wpi.first.wpilibj.command.Scheduler;
 
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.HALUtil;
@@ -14,29 +11,15 @@ import edu.wpi.first.hal.HALUtil;
 //import java.util.Base64;
 
 //-import com.ctre.CANTalon;
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.CANSparkMax;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.PowerDistributionPanel;
-import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Timer;
 //-import edu.wpi.first.wpilibj.hal.HAL;
 //-import edu.wpi.first.wpilibj.hal.HALUtil;
 //-import edu.wpi.first.wpilibj.hal.FRCNetComm.tInstances;
 //-import edu.wpi.first.wpilibj.hal.FRCNetComm.tResourceType;
-import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends RobotBase {
@@ -47,15 +30,10 @@ public class Robot extends RobotBase {
 	public static double right_x;
 	public static double right_y;
 	
-	private Digit_Board _db = Digit_Board.getInstance();
-	private DriverStation _ds = DriverStation.getInstance();
-	private Drive _drive = Drive.getInstance();
 	private Update_Semaphore _semaphore = Update_Semaphore.getInstance();
 	private Logger _logger = Logger.getInstance();
 	private Arduino _arduino = Arduino.getInstance();
 	
-	private HashMap<String, double[][]> map = new HashMap<String, double[][]>();
-	private SendableChooser<String> pos = new SendableChooser<String>();
 	
 	//private Lift _lift = Lift.getInstance();
 	//private Navx _navx = Navx.getInstance();
@@ -94,10 +72,7 @@ public class Robot extends RobotBase {
 			public void run() {
 				_arduino.setPartyMode(true);
 				char edge_track = 0;
-				PowerDistributionPanel pdp = new PowerDistributionPanel();
 
-				AnalogInput pressure_1 = new AnalogInput(4);
-				AnalogInput pressure_2 = new AnalogInput(5);
 				//Compressor c = new Compressor(0);
 				
 				/*SmartDashboard.putNumber("Auton Delay", 0.0);
@@ -130,8 +105,6 @@ public class Robot extends RobotBase {
 					//SmartDashboard.putNumber("Robot Time", m_ds.getMatchTime());
 					//SmartDashboard.putNumber("Robot Current", pdp.getTotalCurrent());
 					//SmartDashboard.putNumber("Arm Power", _pickup.getPower());
-					SmartDashboard.putNumber("Pressure High", pressure_1.getAverageVoltage()*50 - 25);
-					SmartDashboard.putNumber("Pressure Low", pressure_2.getAverageVoltage()*50 - 25);
 					SmartDashboard.putString("Spew Speed", (Wheels.put_on_speedo()*100) + "%");
 					
 					/*SmartDashboard.putBoolean("Alignment Good Configuration", Auto_Alignment.check_sensors());

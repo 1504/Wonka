@@ -1,6 +1,5 @@
 package org.usfirst.frc1504.Wonka;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -34,26 +33,20 @@ public class Arduino
 
 	private class Lights_Thread implements Runnable
 	{
-		private int[][] _arm_colors = {{255,180,0}, {255,80,0}, {255,90,120}, {255,0,255}, {64,224,208}};
-		private int[][] _post_colors = {{103,255,0}, {255,15,2}, {255,0,230}, {160,255,141}};
-
+		
 		private Arduino _arduino;// = Arduino.getInstance();
 		//private Hatch _hatch;// = Hatch.getInstance();
 		//private Elevator _elevator;// = Elevator.getInstance();
-		private Drive _drive;// = Drive.getInstance();
+		
 		private Digit_Board _digit;
 		private DigitBoard _board;
 		//private Lift _lift;
 
 		//private Hatch.HATCH_STATE _last_hatch = null;
 		//private Elevator.ELEVATOR_MODE _last_elevator_mode = null;
-		private int _last_elevator_setpoint = -1;
-		private boolean _last_elevator_moving;
-		private boolean _last_drive;
 
 		private boolean _update = true;
 		private boolean _diagnostic = false;
-		private boolean _initialize = true;
 
 		Lights_Thread(Arduino arduino)
 		{
@@ -132,32 +125,10 @@ public class Arduino
 					Timer.delay(.2);
 				}
 			}
-			_initialize = true;
 			_digit.start();
 		}
 
-		private void lift_sequence()
-		{
-			_arduino.setPartyMode(false);
-			_arduino.setArmLightsState(false);
-			_arduino.setPostLightsState(false);
-
-			int R = DriverStation.getInstance().getAlliance() == DriverStation.Alliance.Red ? 255 : 0;
-			int B = (R == 255) ? 0 : 255;
-			_arduino.setArmLightsColor(R, 0, B);
-			_arduino.setPostLightsColor(R, 0, B);
-/*
-			while(_lift.getState() != Lift.LIFT_STATE.RETRACT)
-			{
-				_arduino.setArmLightsState(_lift.get_moving());
-				_arduino.setPostLightsState(_lift.get_moving());
-				Timer.delay(.1);
-			}*/
-
-			_arduino.setPartyMode(true);
-
-			_initialize = true;
-		}
+		
 
 		public void run()
 		{/*

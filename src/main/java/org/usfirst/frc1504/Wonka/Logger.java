@@ -1,17 +1,12 @@
 package org.usfirst.frc1504.Wonka;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 //import edu.wpi.first.wpilibj.DriverStation;
 
 public class Logger {
-	private File _outfile;
 	private FileOutputStream _file_output;
 	
 	//private DriverStation _ds = DriverStation.getInstance();

@@ -121,7 +121,6 @@ public class Groundtruth implements Updatable {
 		// Anticlockwise
 		motion[2] = (normalized_data[4] - normalized_data[1]) / (2.0 * Map.GROUNDTRUTH_TURN_CIRCUMFERENCE);
 		
-		// TODO: Compute rolling positional error
 		for(int i = 0; i < _position.length; i++)
 		{
 			_position[i] += motion[i];

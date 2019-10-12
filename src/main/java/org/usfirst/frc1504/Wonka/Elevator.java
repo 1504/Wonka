@@ -2,24 +2,13 @@ package org.usfirst.frc1504.Wonka;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANEncoder;
 
 import org.usfirst.frc1504.Wonka.Update_Semaphore.Updatable;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.Preferences;
 
 public class Elevator implements Updatable {
 	// Elevator
-	private static double rotato = 0;
-
-	private boolean _elevator_enable = false;
-	
 
 	private WPI_TalonSRX _top_actuator;
 	//private WPI_TalonSRX _bottom_actuator;
@@ -30,7 +19,6 @@ public class Elevator implements Updatable {
 	private DriverStation _ds = DriverStation.getInstance();
 
 	
-	private Potentiometer _top_potentiometer;
 	//private CANEncoder _top_encoder;
 	//private Glide _bottom_glide;
 	//private Glide _top_glide;
@@ -43,8 +31,6 @@ public class Elevator implements Updatable {
 
 	private Elevator() // Elevator constructor
 	{
-		AnalogInput b = new AnalogInput(Map.TOP_POTENTIOMETER_PORT);
-		_top_potentiometer = new AnalogPotentiometer(b, 100, 0);
 
 		_top_actuator = new WPI_TalonSRX(Map.TOP_ACTUATOR_PORT);
 		//_bottom_actuator = new WPI_TalonSRX(Map.BOTTOM_ACTUATOR_PORT);

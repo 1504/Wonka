@@ -2,7 +2,6 @@ package org.usfirst.frc1504.Wonka;
 
 import org.usfirst.frc1504.Wonka.DigitBoard;
 //import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.RobotController;
 
 public class Digit_Board
 {
@@ -12,9 +11,6 @@ public class Digit_Board
 	private long _thread_sleep_delay = 100;
 	//private int _thread_sleep_counter;
 	
-	private double _voltage;
-	
-	private double _current_pot;
 	//private double _last_pot;
 	
 	//private boolean _a;
@@ -80,8 +76,6 @@ public class Digit_Board
 	//Updates the values used for the display.
 	public void update()
 	{
-		_current_pot = _board.getPotentiometer();
-		_voltage = RobotController.getBatteryVoltage();
 		//_a = _board.getAOnRisingEdge();
 		//_b = _board.getBOnRisingEdge();
 	}

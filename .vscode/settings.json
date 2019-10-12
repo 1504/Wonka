@@ -9,7 +9,11 @@
     "bin/": true,
     ".classpath": true,
     ".project": true,
-    "**/*~": true
+    "**/*~": true,
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
   },
   "powermode.enableShake": false,
   "powermode.explosionDuration": 3000
