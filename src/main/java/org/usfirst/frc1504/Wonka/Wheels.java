@@ -84,6 +84,7 @@ public class Wheels implements Updatable
             _right_spew.set(0);
         }
         card_rotator();
+        funnel_wheel();
         System.out.println(speedo);
     }
 
