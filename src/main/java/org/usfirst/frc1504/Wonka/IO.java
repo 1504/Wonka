@@ -71,11 +71,6 @@ public class IO
 		return _secondary.getRawButton(Map.FUNNEL_WHEEL);
 	}
 
-	public static boolean get_reverse()
-	{
-		return _secondary.getRawButton(Map.REVERSE);
-	}
-
 	public static double get_auger()
 	{
 		return _secondary.getRawAxis(Map.AUGER_MOTOR);

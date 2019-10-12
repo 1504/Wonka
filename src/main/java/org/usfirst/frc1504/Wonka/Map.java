@@ -33,7 +33,6 @@ public class Map {
 
 	public static final int CARD_SERVO_INPUT = 5;
 	
-	public static final int REVERSE = 7;
 
 	public static final int TOP_POTENTIOMETER_PORT = 1;
 

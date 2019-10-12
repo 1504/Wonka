@@ -88,6 +88,7 @@ public class Wheels implements Updatable
     }
 
     private void card_rotator() 
+
     {
         card_rotator.set(IO.card_servo_input());
     }
@@ -102,7 +103,6 @@ public class Wheels implements Updatable
         }
         _funnel_spew.set(funnel_wheel_speed);
     }
-
     public void semaphore_update() // updates robot information
 	{		
 		if (_ds.isDisabled()) // only runs in teleop

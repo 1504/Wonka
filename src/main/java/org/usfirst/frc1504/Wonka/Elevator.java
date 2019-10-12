@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.Preferences;
 public class Elevator implements Updatable {
 	// Elevator
 	private static double rotato = 0;
-	private int reverse = 1;
 
 	private boolean _elevator_enable = false;
 	
@@ -67,13 +66,7 @@ public class Elevator implements Updatable {
 
 	private void ooger_speeds() 
     {
-		if(IO.get_reverse())
-		{
-			reverse = -1;
-		} else {
-			reverse = 1;
-		}
-        _auger.set(reverse*IO.get_auger());
+        _auger.set(IO.get_auger());
     }
 
 
