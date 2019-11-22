@@ -41,25 +41,26 @@ public class Map {
 	public static final int AUGER_PORT = 39;
 	public static final double ROLLER_SPEED_MULTIPLIER = 0.75;
 
-	//1 : A  - Auto_alignment_button
-	//2 : B  - Grabber
-	//3 : X  - Auto_placement_button
-	//4 : Y  - extend/retract arms
-	//5 : LB - Endgame Lift Front
-	//6 : RB - Endgame Lift Back
-	//7 : Back 
-	//8 : Start
-	//9 : Press left joystick
-	//10 : Press right joystick
+	//1 : A  - Set Point 3
+	//2 : B  - Set Point 2
+	//3 : X  - Set Point 4
+	//4 : Y  - Set Point 1
+	//5 : LB - Mode Switch
+	//6 : RB - 
+	//7 : Back - Override Mode
+	//8 : Start - 
+	//9 : Press left joystick - 
+	//10 : Press right joystick - 
 	
-	//0 : X axis-left joystick
-	//1 : Y axis-left joystick - spinning rotors
-	//2 : LT
-	//3 : RT
-	//4 : X axis-right joystick
-	//5 : Y axis-right joystick
+	//0 : X axis-left joystick - 
+	//1 : Y axis-left joystick - 
+	//2 : LT - 
+	//3 : RT -
+	//4 : X axis-right joystick -
+	//5 : Y axis-right joystick -
 
-	//D-PAD controls are hid() in IO
+	//D-PAD - Edit Set Points, Manual Control in Override Mode
+	// controls are hid() in IO
 
 	public static final double POTENTIOMETER_LIMIT = 5;
 	// Joystick-rotation buttons

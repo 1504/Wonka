@@ -215,12 +215,12 @@ public class Drive implements Updatable
 					//if(_ds.isOperatorControl())
 					{
 						//input = detents(input);
-						if(IO.reset_front_side())
+						/*if(IO.reset_front_side())
 						{
 							fSideAngleDegrees(0.0);
 						}
-						input = frontside(input);
-						if (!IO.get_drive_op_toggle())
+						input = frontside(input);*/
+						//if (!IO.get_drive_op_toggle())
 						{
 							input = orbit_point(input);
 						}
